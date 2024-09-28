@@ -1,4 +1,5 @@
 import localFont from "next/font/local";
+import { headers } from 'next/headers'
 import "./globals.css";
 
 const geistSans = localFont({
@@ -18,8 +19,11 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const nonce = headers().get('x-nonce')
+
   return (
     <html lang="en">
+      <meta property="csp-nonce" content={nonce} />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
